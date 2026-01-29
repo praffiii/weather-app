@@ -56,13 +56,11 @@ async function fetchWeatherData(city) {
   const { latitude, longitude, name, country } = geoData.results[0];
 
   // 2. Weather Data
-  // Using 'current' parameter for more detailed current weather (v1)
   const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
   const weatherRes = await fetch(weatherUrl);
   const weatherData = await weatherRes.json();
 
   updateUI(name, country, weatherData.current);
-  // updateBackground removed as per user request for smoother gradient focus
 }
 
 function updateUI(city, country, current) {
@@ -100,7 +98,7 @@ function updateUI(city, country, current) {
 function showError() {
   errorMsg.classList.remove("hidden");
   document.body.style.background =
-    "linear-gradient(135deg, #4b5563 0%, #1f2937 100%)"; // Grey for error
+    "linear-gradient(135deg, #4b5563 0%, #1f2937 100%)";
 }
 
 // WMO Weather Interpretation
@@ -108,38 +106,31 @@ function getWeatherInfo(code) {
   // Default
   let icon = "fa-cloud";
   let description = "Unknown";
-  // Deep Purple to Pink (generic)
   let gradient = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
 
   if (code === 0) {
     icon = "fa-sun";
     description = "Clear Sky";
-    // Bright Vibrant Orange to warm Yellow
     gradient = "linear-gradient(135deg, #FF4E50 0%, #F9D423 100%)";
   } else if ([1, 2, 3].includes(code)) {
     icon = "fa-cloud-sun";
     description = "Partly Cloudy";
-    // Cyan to Blue
     gradient = "linear-gradient(135deg, #00C9FF 0%, #92FE9D 100%)";
   } else if ([45, 48].includes(code)) {
     icon = "fa-smog";
     description = "Foggy";
-    // Mystical Grey/Purple
     gradient = "linear-gradient(135deg, #757F9A 0%, #D7DDE8 100%)";
   } else if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) {
     icon = "fa-cloud-rain";
     description = "Rain";
-    // Deep Blue to Purple
     gradient = "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)";
   } else if ([71, 73, 75, 77, 85, 86].includes(code)) {
     icon = "fa-snowflake";
     description = "Snow";
-    // Cool White/Blue
     gradient = "linear-gradient(135deg, #E0EAFC 0%, #CFDEF3 100%)";
   } else if ([95, 96, 99].includes(code)) {
     icon = "fa-bolt";
     description = "Thunderstorm";
-    // Dark intense Purple/Black
     gradient = "linear-gradient(135deg, #232526 0%, #414345 100%)";
   }
 
