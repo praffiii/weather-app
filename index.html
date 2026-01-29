@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorful Weather</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="flex items-center justify-center p-4 text-white animated-bg overflow-hidden relative"
+  >
+    <!-- Background Gradient is handled by body style and CSS animation -->
+
+    <div
+      class="glass rounded-3xl p-8 w-full max-w-md shadow-2xl transform transition hover:scale-[1.01] duration-300"
+    >
+      <!-- Search Bar -->
+      <div class="relative mb-8">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search city..."
+          class="w-full bg-white/20 border-none rounded-full py-3 px-6 placeholder-white/70 text-white outline-none focus:ring-2 focus:ring-white/50 transition shadow-inner"
+        />
+        <button
+          id="search-btn"
+          class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/30 rounded-full flex items-center justify-center hover:bg-white/40 transition"
+        >
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
+      <!-- Default State / Loading -->
+      <div id="loading" class="hidden text-center py-8">
+        <div
+          class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"
+        ></div>
+        <p>Scanning the skies...</p>
+      </div>
+
+      <!-- Weather Content -->
+      <div
+        id="weather-container"
+        class="text-center transition-all duration-500"
+      >
+        <!-- Main Info -->
+        <div class="mb-8">
+          <h2
+            id="city-name"
+            class="text-3xl font-bold mb-1 tracking-wide drop-shadow-md"
+          >
+            New York
+          </h2>
+          <p id="date" class="text-white/80 text-sm font-light">
+            Monday, 12 Oct
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center justify-center mb-8 relative">
+          <div class="text-9xl font-bold relative z-10 drop-shadow-lg">
+            <span id="temperature">20</span
+            ><span class="text-4xl align-top">°</span>
+          </div>
+          <!-- Dynamic Weather Icon -->
+          <div
+            id="weather-icon-container"
+            class="text-6xl my-4 drop-shadow-lg animate-bounce duration-[2000ms]"
+          >
+            <i class="fas fa-cloud-sun"></i>
+          </div>
+          <p
+            id="weather-desc"
+            class="text-xl font-medium tracking-wider uppercase"
+          >
+            Cloudy
+          </p>
+        </div>
+
+        <!-- Details Grid -->
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div
+            class="glass rounded-2xl p-4 flex flex-col items-center hover:bg-white/10 transition"
+          >
+            <i class="fas fa-wind mb-2 text-xl opacity-80"></i>
+            <span class="text-white/60 text-xs uppercase tracking-wider"
+              >Wind</span
+            >
+            <span id="wind-speed" class="font-bold text-lg">12 km/h</span>
+          </div>
+          <div
+            class="glass rounded-2xl p-4 flex flex-col items-center hover:bg-white/10 transition"
+          >
+            <i class="fas fa-tint mb-2 text-xl opacity-80"></i>
+            <span class="text-white/60 text-xs uppercase tracking-wider"
+              >Humidity</span
+            >
+            <span id="humidity" class="font-bold text-lg">45%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-msg" class="hidden text-center py-10">
+        <i class="fas fa-poo-storm text-6xl mb-4 opacity-80"></i>
+        <p class="text-lg">Oops! City not found.</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
