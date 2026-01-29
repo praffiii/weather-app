@@ -20,10 +20,14 @@ searchInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") handleSearch();
 });
 
-// Initial Load
-// Initial Load
-// Parallax effect removed due to gradient focus
+// Date
+dateEl.innerHTML = new Date().toLocaleDateString("en-US", {
+  weekday: "long",
+  day: "numeric",
+  month: "short",
+});
 
+// Search Function
 async function handleSearch() {
   const city = searchInput.value.trim();
   if (!city) return;
@@ -43,8 +47,9 @@ async function handleSearch() {
   }
 }
 
+// Fetch Weather Data
 async function fetchWeatherData(city) {
-  // 1. Geocoding
+  // 1. Geocoding API
   const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
   const geoRes = await fetch(geoUrl);
   const geoData = await geoRes.json();
